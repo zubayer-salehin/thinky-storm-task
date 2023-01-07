@@ -3,7 +3,13 @@ import React from 'react';
 const ShippingAddress = () => {
     return (
         <div>
-            <h4 className='shippingAndBillingAddressText'>Shipping Address</h4>
+            <div className='shippingAddressTitle'>
+                <h4 className='shippingAndBillingAddressText'>Shipping Address</h4>
+                <div className='billingAddressCopy'>
+                    <i class="uil uil-arrow-down"></i>
+                    <span>Copy Billing Address</span>
+                </div>
+            </div>
             <h4 className='attention_text'>Attention</h4>
             <div className="form_container">
                 <input type="text" className='name_input' placeholder='Enter person/site name' />
