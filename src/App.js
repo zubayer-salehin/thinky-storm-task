@@ -1,11 +1,11 @@
 import './App.css';
-import Home from './components/Home';
+import FoodDeliveryAddress from './components/FoodDeliveryAddress';
 
 
 function App() {
   return (
     <div>
-      <Home></Home>
+      <FoodDeliveryAddress />
     </div>
   );
 }

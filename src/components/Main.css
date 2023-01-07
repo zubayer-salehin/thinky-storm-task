@@ -1,0 +1,51 @@
+.FoodDeliveryAddress-container {
+    width: 80%;
+    height: fit-content;
+    background-color: #eeeeee;
+    margin-top: 1%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 100px;
+}
+
+.shippingAndBillingAddressText {
+    padding-bottom: 6px;
+}
+
+.attention_text {
+    padding-bottom: 6px;
+}
+
+h4 {
+    margin: 0px;
+}
+
+.name_input,
+.select_input,
+.other_input_address {
+    width: 100%;
+    padding: 3px 6px;
+}
+
+.name_input,
+.select_input,
+.other_input_address:focus {
+    outline: none;
+}
+
+.single_select_input,
+.single_input {
+    padding-top: 5px;
+}
+
+.single_select_input_label {
+    font-size: 14px;
+}
+
+.single_input_label {
+    font-size: 14px;
+    font-weight: 600;
+}
