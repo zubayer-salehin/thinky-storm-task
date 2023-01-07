@@ -1,6 +1,6 @@
 import React from 'react';
-import BillingAddress from './BillingAddress';
-import ShippingAddress from './ShippingAddress';
+import BillingAddress from './Address/BillingAddress';
+import ShippingAddress from './Address/ShippingAddress';
 import "./Main.css";
 
 const FoodDeliveryAddress = () => {

@@ -32,13 +32,25 @@ h4 {
 
 .name_input,
 .select_input,
-.other_input_address:focus {
+.other_input_address {
     outline: none;
 }
 
 .single_select_input,
 .single_input {
+    position: relative;
     padding-top: 5px;
+}
+
+.input-arrow {
+    position: absolute;
+    top: 56%;
+    right: -1%;
+    transition: transform 0.2s linear;
+}
+
+.input-arrow-active {
+    transform: rotate(-180deg);
 }
 
 .single_select_input_label {
@@ -48,4 +60,65 @@ h4 {
 .single_input_label {
     font-size: 14px;
     font-weight: 600;
+}
+
+.option-box-parent {
+    position: relative;
+}
+
+.option-container {
+    position: absolute;
+    top: 7px;
+    left: 0px;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: white;
+    z-index: 2;
+}
+
+.option-box {
+    max-height: 210px;
+    overflow-y: scroll;
+    margin-top: 5px;
+}
+
+.filter-input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 3px 6px;
+    margin-top: 4px;
+    border-radius: 2px;
+    border: 1px solid black;
+}
+
+.search-text {
+    font-size: 14px;
+    color: rgb(21, 124, 21);
+    padding: 4px 0px;
+    margin: 0px 0px 0px 2px;
+}
+
+.loading-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(17, 106, 17);
+    padding: 4px 0px;
+    margin: 0px 0px 0px 2px;
+}
+
+ul {
+    padding-left: 0px;
+    margin-top: 3px;
+    margin-bottom: 0px;
+}
+
+ul>li {
+    font-size: 14px;
+    padding: 5px 3px;
+    list-style: none;
+}
+
+ul>li:hover {
+    background-color: rgb(214, 215, 216);
 }
