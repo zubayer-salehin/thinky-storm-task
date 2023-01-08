@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import BillingAddress from './Address/BillingAddress';
 import ShippingAddress from './Address/ShippingAddress';
 import "./Main.css";
 
+
+export const BILLING_CONTEXT = createContext();
+
 const FoodDeliveryAddress = () => {
+
+    const [selectBCountry, setSelectBCountry] = useState({});
+    const [selectBDivision, setSelectBDivision] = useState({});
+    const [selectBDistrict, setSelectBDistrict] = useState({});
+    const [selectBUpazila, setSelectBUpazila] = useState({});
+    const [selectBUnion, setSelectBUnion] = useState({});
+    const [selectBZip, setSelectBZip] = useState({});
+    const [selectBVillage, setSelectBVillage] = useState({});
+
+    const values = { selectBCountry, setSelectBCountry, selectBDivision, setSelectBDivision, selectBDistrict, setSelectBDistrict, selectBUpazila, setSelectBUpazila, selectBUnion, setSelectBUnion, selectBZip, setSelectBZip, selectBVillage, setSelectBVillage }
+
     return (
-        <div className='FoodDeliveryAddress-container'>
-            <BillingAddress />
-            <ShippingAddress />
-        </div>
+        <BILLING_CONTEXT.Provider value={values}>
+            <div className='FoodDeliveryAddress-container'>
+                <BillingAddress />
+                <ShippingAddress />
+            </div>
+        </BILLING_CONTEXT.Provider>
     );
 };
 

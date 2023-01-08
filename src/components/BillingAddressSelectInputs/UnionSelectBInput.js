@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { BILLING_CONTEXT } from '../FoodDeliveryAddress';
 
-const UnionSelectInput = ({ unionProps }) => {
+const UnionSelectBInput = () => {
 
-    const { selectUnion, setSelectUnion, selectUpazila } = unionProps;
+    const { selectBUnion, setSelectBUnion, selectBUpazila } = useContext(BILLING_CONTEXT);
     const [union, setUnion] = useState([]);
     const [listShow, setListShow] = useState(false);
     const [filter, setFilter] = useState([]);
@@ -11,10 +12,10 @@ const UnionSelectInput = ({ unionProps }) => {
         fetch("unions.json")
             .then(res => res.json())
             .then(data => {
-                const filterUnions = data.filter(d => Number(d.upazilla_id) === Number(selectUpazila?.id))
+                const filterUnions = data.filter(d => Number(d.upazilla_id) === Number(selectBUpazila?.id))
                 setUnion(filterUnions);
             })
-    }, [selectUpazila])
+    }, [selectBUpazila])
 
     const handleFilter = (e) => {
         const filtervalue = union.filter(d => d.name.toLowerCase().includes(e.target.value.toLowerCase()))
@@ -22,7 +23,7 @@ const UnionSelectInput = ({ unionProps }) => {
     }
 
     const handleChoose = (singleUnion) => {
-        setSelectUnion(singleUnion);
+        setSelectBUnion(singleUnion);
         setFilter([])
         setListShow(false);
     }
@@ -30,7 +31,7 @@ const UnionSelectInput = ({ unionProps }) => {
     return (
         <div className="single_select_input">
             <label className='single_select_input_label' htmlFor="union">Union/Area/Town</label>
-            <input onClick={() => setListShow(!listShow)} type="text" onChange={() => setSelectUnion(selectUnion)} className='select_input' id='union' placeholder='Please Search' defaultValue={selectUnion?.name} disabled={!selectUpazila?.id ? true : false} readOnly />
+            <input onClick={() => setListShow(!listShow)} type="text" onChange={() => setSelectBUnion(selectBUnion)} className='select_input' id='union' placeholder='Please Search' defaultValue={selectBUnion?.name} disabled={!selectBUpazila?.id ? true : false} readOnly />
             <i className={`uil uil-angle-down input-arrow ${listShow && "input-arrow-active"}`}></i>
             <div className="option-box-parent">
                 {listShow &&
@@ -53,4 +54,4 @@ const UnionSelectInput = ({ unionProps }) => {
     );
 };
 
-export default UnionSelectInput;
+export default UnionSelectBInput;

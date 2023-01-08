@@ -1,55 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { SHIPPING_CONTEXT } from '../Address/ShippingAddress';
 
-const CountrySelectInput = ({ countryProps }) => {
+const UpazilaSelectSInput = () => {
 
-    const { selectCountry, setSelectCountry, setSelectDivision } = countryProps;
-    const [country, setCountry] = useState([]);
+    const { selectSUpazila, setSelectSUpazila, selectSDistrict, setSelectSUnion } = useContext(SHIPPING_CONTEXT);
+    const [upazila, setUpazila] = useState([]);
     const [listShow, setListShow] = useState(false);
     const [filter, setFilter] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setLoading(true);
-        fetch("countrys.json")
+        fetch("upazilas.json")
             .then(res => res.json())
             .then(data => {
-                setCountry(data)
+                const filterUpazilas = data.filter(d => Number(d.district_id) === Number(selectSDistrict?.id))
+                setUpazila(filterUpazilas);
                 setLoading(false);
             })
-    }, [])
+    }, [selectSDistrict])
 
     const handleFilter = (e) => {
-        const filtervalue = country.filter(c => c.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        const filtervalue = upazila.filter(d => d.name.toLowerCase().includes(e.target.value.toLowerCase()))
         setFilter(filtervalue);
     }
 
-    const handleChoose = (singleCountry) => {
-        setSelectCountry(singleCountry);
-        setSelectDivision(null);
+    const handleChoose = (singleUpazila) => {
+        setSelectSUpazila(singleUpazila);
+        setSelectSUnion(false)
         setFilter([])
         setListShow(false);
     }
 
     return (
         <div className="single_select_input">
-            <label className='single_select_input_label' htmlFor="country">Country</label>
-            <input onClick={() => setListShow(!listShow)} type="text" onChange={() => setSelectCountry(selectCountry)} className='select_input' id='country' placeholder='Please Search' defaultValue={selectCountry?.name} readOnly />
+            <label className='single_select_input_label' htmlFor="thana">City/Sub District/Thana</label>
+            <input onClick={() => setListShow(!listShow)} type="text" onChange={() => setSelectSUpazila(selectSUpazila)} className='select_input' id='thana' placeholder='Please Search' defaultValue={selectSUpazila?.name} disabled={!selectSDistrict?.id ? true : false} readOnly />
             <i className={`uil uil-angle-down input-arrow ${listShow && "input-arrow-active"}`}></i>
             <div className="option-box-parent">
                 {listShow &&
-                    // Country Options Box
                     <div className="option-container">
-                        {/* Country Search Box */}
                         <input onChange={(e) => handleFilter(e)} className='filter-input' type="text" autoFocus />
                         {loading ? <p className='loading-text'>Loading...</p> :
                             <div className='option-box'>
                                 <p className='search-text'>Search for Select</p>
                                 <ul>
-                                    {/* Country Options */}
                                     {filter.length ?
                                         filter.map(sc => <li key={Math.random() * 1000} onClick={() => handleChoose(sc)}>{sc.name}</li>)
                                         :
-                                        country.map(sc => <li key={Math.random() * 1000} onClick={() => handleChoose(sc)}>{sc.name}</li>)
+                                        upazila.map(sc => <li key={Math.random() * 1000} onClick={() => handleChoose(sc)}>{sc.name}</li>)
                                     }
                                 </ul>
                             </div>
@@ -61,4 +60,4 @@ const CountrySelectInput = ({ countryProps }) => {
     );
 };
 
-export default CountrySelectInput;
+export default UpazilaSelectSInput;

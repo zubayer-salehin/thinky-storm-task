@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { SHIPPING_CONTEXT } from '../Address/ShippingAddress';
 
-const DistrictSelectInput = ({ districtProps }) => {
+const DistrictSelectSInput = () => {
 
-    const { selectDistrict, setSelectDistrict, selectDivision, setSelectUpazila } = districtProps;
+    const { selectSDistrict, setSelectSDistrict, selectSDivision, setSelectSUpazila } = useContext(SHIPPING_CONTEXT);
     const [district, setDistrict] = useState([]);
     const [listShow, setListShow] = useState(false);
     const [filter, setFilter] = useState([]);
@@ -13,11 +14,11 @@ const DistrictSelectInput = ({ districtProps }) => {
         fetch("districts.json")
             .then(res => res.json())
             .then(data => {
-                const filterDistrict = data.filter(d => Number(d.division_id) === Number(selectDivision?.id))
+                const filterDistrict = data.filter(d => Number(d.division_id) === Number(selectSDivision?.id))
                 setDistrict(filterDistrict);
                 setLoading(false);
             })
-    }, [selectDivision])
+    }, [selectSDivision])
 
     const handleFilter = (e) => {
         const filtervalue = district.filter(d => d.name.toLowerCase().includes(e.target.value.toLowerCase()))
@@ -25,8 +26,8 @@ const DistrictSelectInput = ({ districtProps }) => {
     }
 
     const handleChoose = (singleDistrict) => {
-        setSelectDistrict(singleDistrict);
-        setSelectUpazila(null)
+        setSelectSDistrict(singleDistrict);
+        setSelectSUpazila(null)
         setFilter([])
         setListShow(false);
     }
@@ -34,7 +35,7 @@ const DistrictSelectInput = ({ districtProps }) => {
     return (
         <div className="single_select_input">
             <label className='single_select_input_label' htmlFor="district">District</label>
-            <input onClick={() => setListShow(!listShow)} type="text" onChange={() => setSelectDistrict(selectDistrict)} className='select_input' id='district' placeholder='Please Search' defaultValue={selectDistrict?.name} disabled={!selectDivision?.id ? true : false} readOnly />
+            <input onClick={() => setListShow(!listShow)} type="text" onChange={() => setSelectSDistrict(selectSDistrict)} className='select_input' id='district' placeholder='Please Search' defaultValue={selectSDistrict?.name} disabled={!selectSDivision?.id ? true : false} readOnly />
             <i className={`uil uil-angle-down input-arrow ${listShow && "input-arrow-active"}`}></i>
             <div className="option-box-parent">
                 {listShow &&
@@ -59,4 +60,4 @@ const DistrictSelectInput = ({ districtProps }) => {
     );
 };
 
-export default DistrictSelectInput;
+export default DistrictSelectSInput;

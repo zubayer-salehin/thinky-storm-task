@@ -1,21 +1,13 @@
-import React, { useState } from 'react';
-import CountrySelectInput from '../SelectInputs/CountrySelectInput';
-import DistrictSelectInput from '../SelectInputs/DistrictSelectInput';
-import DivisionSelectInput from '../SelectInputs/DivisionSelectInput';
-import UnionSelectInput from '../SelectInputs/UnionSelectInput';
-import UpazilaSelectInput from '../SelectInputs/UpazilaSelectInput';
-import VillageSelectInput from '../SelectInputs/VillageSelectInput';
-import ZipSelectInput from '../SelectInputs/ZipSelectInput';
+import React from 'react';
+import CountrySelectBInput from '../BillingAddressSelectInputs/CountrySelectBInput';
+import DistrictSelectBInput from '../BillingAddressSelectInputs/DistrictSelectBInput';
+import DivisionSelectBInput from '../BillingAddressSelectInputs/DivisionSelectBInput';
+import UnionSelectBInput from '../BillingAddressSelectInputs/UnionSelectBInput';
+import UpazilaSelectBInput from '../BillingAddressSelectInputs/UpazilaSelectBInput';
+import VillageSelectBInput from '../BillingAddressSelectInputs/VillageSelectBInput';
+import ZipSelectBInput from '../BillingAddressSelectInputs/ZipSelectBInput';
 
 const BillingAddress = () => {
-
-    const [selectCountry, setSelectCountry] = useState({});
-    const [selectDivision, setSelectDivision] = useState({});
-    const [selectDistrict, setSelectDistrict] = useState({});
-    const [selectUpazila, setSelectUpazila] = useState({});
-    const [selectUnion, setSelectUnion] = useState({});
-    const [selectZip, setSelectZip] = useState({});
-    const [selectVillage, setSelectVillage] = useState({});
 
     return (
         <div>
@@ -25,26 +17,26 @@ const BillingAddress = () => {
                 <input type="text" className='name_input' placeholder='Enter person/site name' />
                 <div className="select_input_container">
 
-                    {/* Country Select Input */}
-                    <CountrySelectInput countryProps={{ selectCountry, setSelectCountry, setSelectDivision }} />
+                        {/* Country Select Input */}
+                        <CountrySelectBInput />
 
-                    {/* Division Select Input */}
-                    <DivisionSelectInput divisionProps={{ selectDivision, setSelectDivision, selectCountry, setSelectDistrict }} />
+                        {/* Division Select Input */}
+                        <DivisionSelectBInput />
 
-                    {/* District Select Input */}
-                    <DistrictSelectInput districtProps={{ selectDistrict, setSelectDistrict, selectDivision, setSelectUpazila }} />
+                        {/* District Select Input */}
+                        <DistrictSelectBInput />
 
-                    {/* Upazila Select Input */}
-                    <UpazilaSelectInput upazilaProps={{ selectUpazila, setSelectUpazila, selectDistrict, setSelectUnion }} />
+                        {/* Upazila Select Input */}
+                        <UpazilaSelectBInput />
 
-                    {/* Union Select Input */}
-                    <UnionSelectInput unionProps={{ selectUnion, setSelectUnion, selectUpazila }} />
+                        {/* Union Select Input */}
+                        <UnionSelectBInput />
 
-                    {/* Zipcode Select Input */}
-                    <ZipSelectInput zipProps={{ selectZip, setSelectZip, selectUnion }} />
+                        {/* Zipcode Select Input */}
+                        <ZipSelectBInput />
 
-                    {/* Zipcode Select Input */}
-                    <VillageSelectInput villageProps={{ selectVillage, setSelectVillage, selectZip }} />
+                        {/* Zipcode Select Input */}
+                        <VillageSelectBInput />
 
                 </div>
 

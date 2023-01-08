@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { SHIPPING_CONTEXT } from '../Address/ShippingAddress';
 
-const VillageSelectInput = ({ villageProps }) => {
+const VillageSelectSInput = () => {
 
-    const { selectVillage, setSelectVillage, selectZip } = villageProps;
+    const { selectSVillage, setSelectSVillage, selectSZip } = useContext(SHIPPING_CONTEXT);
     const [listShow, setListShow] = useState(false);
 
     return (
         <div className="single_select_input">
             <label className='single_select_input_label' htmlFor="streetAddress">Street Address/Village</label>
-            <input onClick={() => setListShow(!listShow)} type="text" className='select_input' id='streetAddress' placeholder='Please Search' defaultValue={selectVillage?.name} disabled={!selectZip?.code ? true : false} readOnly />
+            <input onClick={() => setListShow(!listShow)} type="text" className='select_input' id='streetAddress' placeholder='Please Search' defaultValue={selectSVillage?.name} disabled={!selectSZip?.code ? true : false} readOnly />
             <i className={`uil uil-angle-down input-arrow ${listShow && "input-arrow-active"}`}></i>
             <div className="option-box-parent">
                 {listShow &&
                     <div className="option-container">
-                        <input onBlur={(e) => setSelectVillage({ name: e.target.value })} className='filter-input' type="text" defaultValue={selectVillage?.name} autoFocus/>
+                        <input onBlur={(e) => setSelectSVillage({ name: e.target.value })} className='filter-input' type="text" defaultValue={selectSVillage?.name} autoFocus />
                         <div className='option-box'>
                             <p className='search-text'>Search for Select</p>
                         </div>
@@ -24,4 +25,4 @@ const VillageSelectInput = ({ villageProps }) => {
     );
 };
 
-export default VillageSelectInput;
+export default VillageSelectSInput;

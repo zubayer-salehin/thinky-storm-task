@@ -2,9 +2,6 @@
     width: 80%;
     height: fit-content;
     background-color: #eeeeee;
-    margin-top: 1%;
-    margin-right: auto;
-    margin-left: auto;
     padding: 20px 40px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
