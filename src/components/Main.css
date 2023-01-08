@@ -86,6 +86,7 @@ h4 {
 }
 
 .option-container {
+    box-sizing: border-box;
     position: absolute;
     top: 7px;
     left: 0px;
