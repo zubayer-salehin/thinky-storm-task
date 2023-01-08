@@ -20,9 +20,11 @@ const FoodDeliveryAddress = () => {
 
     return (
         <BILLING_CONTEXT.Provider value={values}>
-            <div className='FoodDeliveryAddress-container'>
-                <BillingAddress />
-                <ShippingAddress />
+            <div className="container">
+                <div className='FoodDeliveryAddress'>
+                    <BillingAddress />
+                    <ShippingAddress />
+                </div>
             </div>
         </BILLING_CONTEXT.Provider>
     );
