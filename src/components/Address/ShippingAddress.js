@@ -13,26 +13,7 @@ export const SHIPPING_CONTEXT = createContext();
 
 const ShippingAddress = () => {
 
-    const { selectBCountry, selectBDivision, selectBDistrict, selectBUpazila, selectBUnion, selectBZip, selectBVillage } = useContext(BILLING_CONTEXT);
-
-    const billingAddress = {
-        country: selectBCountry?.name,
-        division: selectBDivision?.name,
-        district: selectBDistrict?.name,
-        upazila: selectBUpazila?.name,
-        union: selectBUnion?.name,
-        zip: selectBZip?.code,
-        village: selectBVillage?.name
-    };
-
-    const copyToClipboard = (address) => {
-        let textField = document.createElement('textarea')
-        textField.innerText = address
-        document.body.appendChild(textField)
-        textField.select()
-        document.execCommand('copy')
-        textField.remove();
-    }
+    const { selectBCountry, selectBDivision, selectBDistrict, selectBUpazila, selectBUnion, selectBZip, selectBVillage, bName, bHouse, bPhone, bFax } = useContext(BILLING_CONTEXT);
 
     const [selectSCountry, setSelectSCountry] = useState({});
     const [selectSDivision, setSelectSDivision] = useState({});
@@ -41,21 +22,39 @@ const ShippingAddress = () => {
     const [selectSUnion, setSelectSUnion] = useState({});
     const [selectSZip, setSelectSZip] = useState({});
     const [selectSVillage, setSelectSVillage] = useState({});
+    const [sName, setSName] = useState("");
+    const [sHouse, setSHouse] = useState("");
+    const [sPhone, setSPhone] = useState("");
+    const [sFax, setSFax] = useState("");
 
     const values = { selectSCountry, setSelectSCountry, selectSDivision, setSelectSDivision, selectSDistrict, setSelectSDistrict, selectSUpazila, setSelectSUpazila, selectSUnion, setSelectSUnion, selectSZip, setSelectSZip, selectSVillage, setSelectSVillage }
+
+    const copyBillingAddress = () => {
+        setSelectSCountry(selectBCountry)
+        setSelectSDivision(selectBDivision)
+        setSelectSDistrict(selectBDistrict)
+        setSelectSUpazila(selectBUpazila)
+        setSelectSUnion(selectBUnion)
+        setSelectSZip(selectBZip)
+        setSelectSVillage(selectBVillage)
+        setSName(bName)
+        setSHouse(bHouse)
+        setSPhone(bPhone)
+        setSFax(bFax)
+    }
 
     return (
         <div>
             <div className='shippingAddressTitle'>
                 <h4 className='shippingAndBillingAddressText'>Shipping Address</h4>
-                <div onClick={() => copyToClipboard(JSON.stringify(billingAddress))} className='billingAddressCopy'>
+                <div onClick={copyBillingAddress} className='billingAddressCopy'>
                     <i className="uil uil-arrow-down"></i>
                     <span>Copy Billing Address</span>
                 </div>
             </div>
             <h4 className='attention_text'>Attention</h4>
             <div className="form_container">
-                <input type="text" className='name_input' placeholder='Enter person/site name' />
+                <input type="text" onBlur={(e) => setSName(e.target.value)} className='name_input' placeholder='Enter person/site name' defaultValue={sName}/>
                 <SHIPPING_CONTEXT.Provider value={values}>
                     <div className="select_input_container">
                         {/* Country Select Input */}
@@ -85,15 +84,15 @@ const ShippingAddress = () => {
                 <div>
                     <div className="single_input">
                         <label className='single_input_label' htmlFor="house">House/Suite/Apartment no</label>
-                        <input type="text" className='other_input_address' id='house' />
+                        <input type="text" onBlur={(e) => setSHouse(e.target.value)} className='other_input_address' id='house' defaultValue={sHouse}/>
                     </div>
                     <div className="single_input">
                         <label className='single_input_label' htmlFor="phone">Phone</label>
-                        <input type="text" className='other_input_address' id='phone' />
+                        <input type="text" onBlur={(e) => setSPhone(e.target.value)} className='other_input_address' id='phone' defaultValue={sPhone}/>
                     </div>
                     <div className="single_input">
                         <label className='single_input_label' htmlFor="fax">Fax</label>
-                        <input type="text" className='other_input_address' id='fax' />
+                        <input type="text" onBlur={(e) => setSFax(e.target.value)} className='other_input_address' id='fax' defaultValue={sFax}/>
                     </div>
                 </div>
             </div>
